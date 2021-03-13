@@ -44,13 +44,18 @@ public class University {
                                 (v1, v2) -> v1, TreeMap::new)));
     }
 
-    public Map<String, Map<String, Double>> task4() {
+    public Map<String, Double> task4() {
         return students.stream()
                 .collect(Collectors.groupingBy(Student::getGroup,
                         TreeMap::new,
                         Collectors.toMap(Student::getName, student -> student.getPoints().stream()
-                                        .mapToInt(Integer::intValue).average().getAsDouble(),
-                                (v1, v2) -> v1, TreeMap::new)));
+                                        .mapToInt(Integer::intValue).sum(),
+                                (v1, v2) -> v1, TreeMap::new)))
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> Math.round(e.getValue().values().stream().mapToInt(Integer::intValue)
+                                .average().getAsDouble() * 100.0) / 100.0));
     }
 
     public Map<String, Set<String>> task5() {

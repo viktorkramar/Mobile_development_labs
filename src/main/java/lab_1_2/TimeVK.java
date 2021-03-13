@@ -4,6 +4,9 @@ import java.time.LocalTime;
 import java.util.Date;
 
 public class TimeVK {
+    private static final TimeVK MIDNIGHT = new TimeVK(0, 0, 0);
+    private static final TimeVK NOON = new TimeVK(12, 0, 0);
+
     private int hours;
     private int minutes;
     private int seconds;
@@ -33,6 +36,12 @@ public class TimeVK {
 
     @Override
     public String toString() {
+        if(this.equals(MIDNIGHT)) {
+            return "12:00:00 AM";
+        }
+        if(this.equals(NOON)) {
+            return "12:00:00 PM";
+        }
         return String.format("%02d:%02d:%02d %s", hours%12, minutes, seconds, hours < 12 ? "AM" : "PM");
     }
 

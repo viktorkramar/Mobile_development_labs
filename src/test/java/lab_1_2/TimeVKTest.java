@@ -51,6 +51,24 @@ class TimeVKTest {
     }
 
     @Test
+    void toStringMidnight() {
+        String expected = "12:00:00 AM";
+
+        TimeVK actual = new TimeVK(0, 0, 0);
+
+        assertEquals(expected, actual.toString());
+    }
+
+    @Test
+    void toStringNoon() {
+        String expected = "12:00:00 PM";
+
+        TimeVK actual = new TimeVK(12, 0, 0);
+
+        assertEquals(expected, actual.toString());
+    }
+
+    @Test
     void toStringAM() {
         String expected = "01:02:03 AM";
 
